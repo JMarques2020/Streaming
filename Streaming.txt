@@ -1,0 +1,257 @@
+CREATE CONSTRAINT usuario_id IF NOT EXISTS
+FOR (u:Usuario)
+REQUIRE u.id IS UNIQUE;
+
+CREATE CONSTRAINT filme_id IF NOT EXISTS
+FOR (f:Filme)
+REQUIRE f.id IS UNIQUE;
+
+CREATE CONSTRAINT serie_id IF NOT EXISTS
+FOR (s:Serie)
+REQUIRE s.id IS UNIQUE;
+
+CREATE CONSTRAINT genero_id IF NOT EXISTS
+FOR (g:Genero)
+REQUIRE g.id IS UNIQUE;
+
+CREATE CONSTRAINT ator_id IF NOT EXISTS
+FOR (a:Ator)
+REQUIRE a.id IS UNIQUE;
+
+CREATE CONSTRAINT diretor_id IF NOT EXISTS
+FOR (d:Diretor)
+REQUIRE d.id IS UNIQUE;
+
+
+CREATE (:Usuario {id:1, nome: 'José Marques'}),
+(:Usuario {id:2, nome: 'Nathália Maria'}),
+(:Usuario {id:3, nome: 'Rita de Cássia '}),
+(:Usuario {id:4, nome: 'Daniel Henrique '}),
+(:Usuario {id:5, nome: 'Agnes Sofia '}),
+(:Usuario {id:6, nome: 'Leonor Benedita '}),
+(:Usuario {id:7, nome: 'Maria do Carmo '}),
+(:Usuario {id:8, nome: 'Carlos Borromeu'}),
+(:Usuario {id:9, nome: 'Marina Marques'}),
+(:Usuario {id:10, nome: 'Mariana Marques'});
+
+
+CREATE
+(:Filme {id: 1, titulo: 'A Origem', ano: 2010}),
+(:Filme {id: 2, titulo: 'Interestelar', ano: 2014}),
+(:Filme {id: 3, titulo: 'Matrix', ano: 1999}),
+(:Filme {id: 4, titulo: 'Avatar', ano: 2009}),
+(:Filme {id: 5, titulo: ‘O Senhor dos Anéis: A Sociedade do Anel', ano: 2001}),
+(:Filme {id: 6, titulo: 'La La Land – Cantando Estações', ano: 2016}),
+(:Filme {id: 7, titulo: 'Parasita', ano: 2019}),
+(:Filme {id: 8, titulo: 'Gladiador', ano: 2000}),
+(:Filme {id: 9, titulo: 'Forrest Gump – O Contador de Histórias', ano: 1994}),
+(:Filme {id: 10, titulo: 'Titanic', ano: 1997});
+
+
+CREATE
+(:Serie {id: 101, titulo: 'Breaking Bad', ano: 2008}),
+(:Serie {id: 102, titulo: 'Dark', ano: 2017}),
+(:Serie {id: 103, titulo: 'Stranger Things', ano: 2016}),
+(:Serie {id: 104, titulo: 'The Crown', ano: 2016}),
+(:Serie {id: 105, titulo: 'The Office', ano: 2005}),
+(:Serie {id: 106, titulo: 'The Witcher ', ano: 2019}),
+(:Serie {id: 107, titulo: 'La Casa de Papel ', ano: 2017}),
+(:Serie {id: 108, titulo: 'The Handmaid’s Tale ', ano: 2017}),
+(:Serie {id: 109, titulo: 'Friends ', ano: 1994}),
+(:Serie {id: 110, titulo: 'Arquivo X ', ano: 1993});
+
+
+CREATE
+(:Genero {id: 1, nome: 'Drama'}),
+(:Genero {id: 2, nome: 'Ficção Científica'}),
+(:Genero {id: 3, nome: 'Ação'}),
+(:Genero {id: 4, nome: 'Comédia'}),
+(:Genero {id: 5, nome: 'Aventura'}),
+(:Genero {id: 6, nome: 'Suspense'});
+
+
+CREATE
+(:Ator {id: 1, nome: 'Leonardo DiCaprio'}),
+(:Ator {id: 2, nome: 'Keanu Reeves'}),
+(:Ator {id: 3, nome: 'Bryan Cranston'}),
+(:Ator {id: 4, nome: 'Millie Bobby Brown'}),
+(:Ator {id: 5, nome: 'Russell Crowe'}),
+(:Ator {id: 6, nome: 'Elijah Wood'}),
+(:Ator {id: 7, nome: 'Sam Worthington'}),
+(:Ator {id: 8, nome: 'Ryan Gosling'}),
+(:Ator {id: 9, nome: 'Song Kang-ho'}),
+(:Ator {id: 10, nome: 'Tom Hanks'});
+
+
+CREATE
+(:Diretor {id: 1, nome: 'Christopher Nolan'}),
+(:Diretor {id: 2, nome: 'Lana Wachowski'}),
+(:Diretor {id: 3, nome: 'James Cameron'}),
+(:Diretor {id: 4, nome: 'Ridley Scott'})
+(:Diretor {id: 5, nome: 'Peter Jackson'}),
+(:Diretor {id: 6, nome: 'Robert Zemeckis'}),
+(:Diretor {id: 7, nome: ‘Damien Chazelle’}),
+(:Diretor {id: 8, nome: 'Song Kang-ho'}),
+(:Diretor {id: 9, nome: 'Boran Bo Odar'}),
+(:Diretor {id: 10, nome: ‘Jesús Colmenar'}),
+(:Diretor {id: 11, nome: ‘Matt e Ross Duffer'}),
+(:Diretor {id: 12, nome: 'Alik Sakharov'}),
+(:Diretor {id: 13, nome: ‘Reed Morano'});
+
+
+USUÁRIO → ASSISTIU (com nota)
+MATCH (u:Usuario {Id: 1}), (f:Filme {id: 10})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 1}), (s:Serie {id: 101})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 2}), (f:Filme {id: 9})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 2}), (s:Serie {id: 102})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 3}), (f:Filme {id: 8})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 3}), (s:Serie {id: 103})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 4}), (f:Filme {id: 7})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 4}), (s:Serie {id: 104})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 5}), (f:Filme {id: 6})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 5}), (s:Serie {id: 105})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 6}), (f:Filme {id: 5})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 6}), (s:Serie {id: 106})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 7}), (f:Filme {id: 4})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 7}), (s:Serie {id: 107})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 8}), (f:Filme {id: 3})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 8}), (s:Serie {id: 108})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 9}), (f:Filme {id: 2})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 9}), (s:Serie {id: 109})
+MERGE (u)-[:ASSISTIU]->(s);
+
+MATCH (u:Usuario {Id: 10}), (f:Filme {id: 1})
+MERGE (u)-[:ASSISTIU]->(f);
+MATCH (u:Usuario {Id: 10}), (s:Serie {id: 110})
+MERGE (u)-[:ASSISTIU]->(s);
+
+
+MATCH (a:Ator {nome:'Leonardo DiCaprio'}), (f:Filme {titulo:'A Origem'})
+CREATE (a)-[:ATUOU_EM]->(f);
+
+MATCH (a:Ator {nome:'Keanu Reeves'}), (f:Filme {titulo:'Matrix'})
+CREATE (a)-[:ATUOU_EM]->(f);
+
+MATCH (a:Ator {nome:'Russell Crowe'}), (f:Filme {titulo:'Gladiador'})
+CREATE (a)-[:ATUOU_EM]->(f);
+
+MATCH (a:Ator {nome:' Elijah Wood'}), (f:Filme {titulo:'O Senhor dos Anéis: A Sociedade do Anel'})
+CREATE (a)-[:ATUOU_EM]->(f);
+
+MATCH (a:Ator {nome: 'Sam Worthington'}), (f:Filme {titulo: 'Avatar'})
+CREATE (a)-[:ATUOU_EM]->(f);
+
+MATCH (a:Ator {nome:'Milie Bob Brown'}), (s:Serie {titulo:'Stranger Thinks'})
+CREATE (a)-[:ATUOU_EM]->(s);
+
+MATCH (a:Ator {nome: 'Bryan Cranston'}), (s:Serie {titulo:'Breaking Bad'})
+CREATE (a)-[:ATUOU_EM]->(s);
+
+
+
+MATCH (d:Diretor {nome:'Christopher Nolan'}), (f:Filme)
+WHERE f.titulo IN ['A Origem','Interestelar']
+CREATE (d)-[:DIRIGIU]->(f);
+
+MATCH (d:Diretor {nome:'Lana Wachowski'}), (f:Filme {titulo:'Matrix'})
+CREATE (d)-[:DIRIGIU]->(f);
+
+MATCH (d:Diretor {nome: 'Ridley Scott'}), (f:Filme {titulo:'Gladiador'})
+CREATE (d)-[:DIRIGIU]->(f);
+
+MATCH (d:Diretor {nome: 'Peter Jackson'}), (f:Filme {titulo:'O Senhor dos Anéis: A Sociedade do Anel'})
+CREATE (d)-[:DIRIGIU]->(f);
+
+MATCH (d:Diretor {nome:'James Cameron'}), (f:Filme)
+WHERE f.titulo IN ['Titanic','Avatar']
+CREATE (d)-[:DIRIGIU]->(f);
+
+
+
+MATCH (f:Filme {titulo:'A Origem'}), (g:Genero {nome:'Ficção Científica'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Interestelar'}), (g:Genero {nome:'Ficção Científica'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Matrix'}), (g:Genero {nome:'Ação'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Avatar'}), (g:Genero {nome:'Ação'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: ' O Senhor dos Anéis: A Sociedade do Anel'}), (g:Genero {nome:'Ação'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'La La Land – Cantando Estações'}), (g:Genero {nome:'Comédia'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Parasita'}), (g:Genero {nome:'Suspense'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Gladiador'}), (g:Genero {nome:'Ação'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Forrest Gump – O Contador de Histórias'}), (g:Genero {nome:'Comédia'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+MATCH (f:Filme {titulo: 'Titanic'}), (g:Genero {nome:'Drama'})
+CREATE (f)-[:PERTENCE_A]->(g);
+
+
+MATCH (s:Serie {titulo:'Breaking Bad'}), (g:Genero {nome:'Drama'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'The Office'}), (g:Genero {nome:'Comédia'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'Dark'}), (g:Genero {nome:'Suspense'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'Stranger Thinks'}), (g:Genero {nome:'Aventura'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'The Crown'}), (g:Genero {nome:'Drama'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'The Witcher'}), (g:Genero {nome:'Aventura'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'La Casa de Papel'}), (g:Genero {nome:'Ação'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'The Handmaids Tale'}), (g:Genero {nome:'Drama'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'Friends'}), (g:Genero {nome:'Comédia'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+MATCH (s:Serie {titulo:'Arquivo X'}), (g:Genero {nome:'Suspense'})
+CREATE (s)-[:PERTENCE_A]->(g);
+
+
